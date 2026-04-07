@@ -64,6 +64,7 @@ import 'leaflet/dist/leaflet.css';
     popupAnchor: [0, -42]
   });
 
+  var bounds = [];
   properties.forEach(function (prop) {
     var marker = L.marker(prop.coords, { icon: markerIcon }).addTo(map);
     var popupContent = '<div class="map-popup"><strong>' + prop.name + '</strong><br>' +
@@ -71,7 +72,13 @@ import 'leaflet/dist/leaflet.css';
       '<span class="popup-unit">' + prop.unit + '</span><br>' +
       (prop.rent ? '<span class="popup-rent">' + prop.rent + '/mo</span>' : '') + '</div>';
     marker.bindPopup(popupContent);
+    bounds.push(prop.coords);
   });
+
+  // Fit map to show all markers
+  if (bounds.length > 0) {
+    map.fitBounds(bounds, { padding: [50, 50] });
+  }
 
   // Map expand/collapse functionality
   var mapExpandBtn = document.getElementById('mapExpandBtn');
