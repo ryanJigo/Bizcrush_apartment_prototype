@@ -97,7 +97,22 @@
     });
   }
 
-  // Wait for Google Maps to load
+  // Wait for Google Maps to load, then initialize
+  function waitForGoogleMaps() {
+    if (typeof google !== 'undefined' && google.maps) {
+      initMap();
+    } else {
+      setTimeout(waitForGoogleMaps, 100);
+    }
+  }
+
+  // Expose initMap for callback and start waiting
   window.initMap = initMap;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', waitForGoogleMaps);
+  } else {
+    waitForGoogleMaps();
+  }
 
 })();
