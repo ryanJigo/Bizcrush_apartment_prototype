@@ -1,5 +1,7 @@
 # BizCrush — 2BR apartment comparison UI
 
+**Repository:** [github.com/ryanJigo/Bizcrush_apartment_prototype](https://github.com/ryanJigo/Bizcrush_apartment_prototype)
+
 Static **HTML + CSS + JavaScript** app: at-a-glance 2-bedroom unit table, property detail cards, and a “Pick” bar for shortlisting.
 
 ## Files
