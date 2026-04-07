@@ -169,100 +169,6 @@ a { color: var(--accent); }
 }
 .btn-check:hover { background: #e5e7eb; color: var(--text); }
 
-/* ── Map Section ─────────────────────────── */
-
-.map-section { padding: 48px 0; }
-
-.map-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.map-expand-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: var(--radius-sm);
-  font-family: var(--font);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background var(--ease), transform 0.1s ease;
-  white-space: nowrap;
-}
-
-.map-expand-btn:hover {
-  background: var(--accent-hover);
-}
-
-.map-expand-btn:active {
-  transform: scale(0.97);
-}
-
-.map-expand-btn svg {
-  transition: transform 0.3s ease;
-}
-
-.map-expand-btn.expanded svg {
-  transform: rotate(180deg);
-}
-
-.property-map {
-  height: 250px;
-  width: 100%;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  background: var(--surface);
-  transition: height 0.3s ease;
-}
-
-.property-map.expanded {
-  height: 600px;
-}
-
-.map-popup {
-  font-family: var(--font);
-  padding: 4px 0;
-}
-
-.map-popup strong {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  display: block;
-  margin-bottom: 4px;
-}
-
-.popup-address {
-  font-size: 12px;
-  color: var(--text-2);
-  display: block;
-  margin-bottom: 6px;
-}
-
-.popup-unit {
-  font-size: 12px;
-  color: var(--text-2);
-  display: block;
-}
-
-.popup-rent {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--accent);
-  display: block;
-  margin-top: 4px;
-}
-
 /* ── Info Section ────────────────────────── */
 
 .info-section {
@@ -435,6 +341,15 @@ a { color: var(--accent); }
   font-size: 13px; color: var(--text-2);
 }
 .prop-address svg { flex-shrink: 0; color: var(--text-muted); }
+.address-link {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--ease);
+}
+.address-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
 
 .rating { text-align: right; }
 .stars-text {
@@ -581,7 +496,4 @@ a { color: var(--accent); }
   .prop-header, .prop-body { padding-left: 18px; padding-right: 18px; }
   .master-table { min-width: 720px; }
   .unit-specs { grid-template-columns: 1fr 1fr; }
-  .property-map { height: 220px; }
-  .property-map.expanded { height: 500px; }
-  .map-header { flex-direction: column; align-items: flex-start; }
 }
