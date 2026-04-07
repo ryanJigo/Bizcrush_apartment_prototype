@@ -36,13 +36,6 @@ import 'leaflet/dist/leaflet.css';
       coords: [47.6372, -122.3241],
       rent: "~$2,095+",
       unit: "Eastlake 2BD"
-    },
-    {
-      name: "KSC Seattle",
-      address: "1730 Minor Ave Suite 1050, Seattle, WA 98101",
-      coords: [47.6149, -122.3265],
-      rent: "",
-      unit: "Office Location"
     }
   ];
 
@@ -64,18 +57,9 @@ import 'leaflet/dist/leaflet.css';
     popupAnchor: [0, -42]
   });
 
-  var officeMarkerIcon = L.divIcon({
-    className: 'custom-marker office-marker',
-    html: '<div class="marker-pin office-pin"></div>',
-    iconSize: [30, 42],
-    iconAnchor: [15, 42],
-    popupAnchor: [0, -42]
-  });
-
   var bounds = [];
   properties.forEach(function (prop) {
-    var icon = prop.name === 'KSC Seattle' ? officeMarkerIcon : markerIcon;
-    var marker = L.marker(prop.coords, { icon: icon }).addTo(map);
+    var marker = L.marker(prop.coords, { icon: markerIcon }).addTo(map);
     var popupContent = '<div class="map-popup"><strong>' + prop.name + '</strong><br>' +
       '<span class="popup-address">' + prop.address + '</span><br>' +
       '<span class="popup-unit">' + prop.unit + '</span><br>' +
