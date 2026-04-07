@@ -64,9 +64,18 @@ import 'leaflet/dist/leaflet.css';
     popupAnchor: [0, -42]
   });
 
+  var officeMarkerIcon = L.divIcon({
+    className: 'custom-marker office-marker',
+    html: '<div class="marker-pin office-pin"></div>',
+    iconSize: [30, 42],
+    iconAnchor: [15, 42],
+    popupAnchor: [0, -42]
+  });
+
   var bounds = [];
   properties.forEach(function (prop) {
-    var marker = L.marker(prop.coords, { icon: markerIcon }).addTo(map);
+    var icon = prop.name === 'KSC Seattle' ? officeMarkerIcon : markerIcon;
+    var marker = L.marker(prop.coords, { icon: icon }).addTo(map);
     var popupContent = '<div class="map-popup"><strong>' + prop.name + '</strong><br>' +
       '<span class="popup-address">' + prop.address + '</span><br>' +
       '<span class="popup-unit">' + prop.unit + '</span><br>' +

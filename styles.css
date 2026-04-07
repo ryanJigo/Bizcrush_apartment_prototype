@@ -260,6 +260,14 @@ a { color: var(--accent); }
   border-radius: 50%;
 }
 
+.office-pin {
+  background: #2563eb;
+}
+
+.office-pin::after {
+  background: white;
+}
+
 .map-popup {
   font-family: var(--font);
   padding: 4px 0;
