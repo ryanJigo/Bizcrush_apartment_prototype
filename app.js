@@ -2,9 +2,6 @@
    Bizcrush — 2BR Options Interactions
    ====================================================== */
 
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-
 (function () {
 
   // Initialize map
@@ -12,89 +9,95 @@ import 'leaflet/dist/leaflet.css';
     {
       name: "Lightbox",
       address: "4545 8th Ave NE, Seattle, WA 98105",
-      coords: [47.6621, -122.3176],
+      coords: { lat: 47.6621, lng: -122.3176 },
       rent: "$1,949",
       unit: "Two Bedroom B1A"
     },
     {
       name: "Capella at Esterra Park",
       address: "2710 Tagore Ave, Redmond, WA 98052",
-      coords: [47.6740, -122.1215],
+      coords: { lat: 47.6740, lng: -122.1215 },
       rent: "$1,975",
       unit: "D2"
     },
     {
       name: "Glendale Apartments",
       address: "5246 Brooklyn Ave NE, Seattle, WA 98105",
-      coords: [47.6641, -122.3145],
+      coords: { lat: 47.6641, lng: -122.3145 },
       rent: "$1,999",
       unit: "2 Bed 1 Bath"
     },
     {
       name: "East Howe Steps",
       address: "1823 Eastlake Ave E, Seattle, WA 98102",
-      coords: [47.6373, -122.3242],
+      coords: { lat: 47.6373, lng: -122.3242 },
       rent: "~$2,095+",
       unit: "Eastlake 2BD"
     }
   ];
 
-  var map = L.map('map', {
-    zoomControl: true,
-    attributionControl: false
-  }).setView([47.6500, -122.2500], 10);
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 47.6500, lng: -122.2500 },
+      zoom: 10,
+      mapTypeControl: true,
+      streetViewControl: false,
+      fullscreenControl: false
+    });
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '',
-    maxZoom: 19
-  }).addTo(map);
+    var bounds = new google.maps.LatLngBounds();
+    var infoWindow = new google.maps.InfoWindow();
 
-  var markerIcon = L.divIcon({
-    className: 'custom-marker',
-    html: '<div class="marker-pin"></div>',
-    iconSize: [30, 42],
-    iconAnchor: [15, 42],
-    popupAnchor: [0, -42]
-  });
+    properties.forEach(function (prop) {
+      var marker = new google.maps.Marker({
+        position: prop.coords,
+        map: map,
+        title: prop.name
+      });
 
-  var bounds = [];
-  properties.forEach(function (prop) {
-    var marker = L.marker(prop.coords, { icon: markerIcon }).addTo(map);
-    var popupContent = '<div class="map-popup"><strong>' + prop.name + '</strong><br>' +
-      '<span class="popup-address">' + prop.address + '</span><br>' +
-      '<span class="popup-unit">' + prop.unit + '</span><br>' +
-      (prop.rent ? '<span class="popup-rent">' + prop.rent + '/mo</span>' : '') + '</div>';
-    marker.bindPopup(popupContent);
-    bounds.push(prop.coords);
-  });
+      var popupContent = '<div class="map-popup"><strong>' + prop.name + '</strong><br>' +
+        '<span class="popup-address">' + prop.address + '</span><br>' +
+        '<span class="popup-unit">' + prop.unit + '</span><br>' +
+        (prop.rent ? '<span class="popup-rent">' + prop.rent + '/mo</span>' : '') + '</div>';
 
-  // Fit map to show all markers
-  if (bounds.length > 0) {
-    map.fitBounds(bounds, { padding: [50, 50] });
+      marker.addListener('click', function () {
+        infoWindow.setContent(popupContent);
+        infoWindow.open(map, marker);
+      });
+
+      bounds.extend(prop.coords);
+    });
+
+    // Fit map to show all markers
+    map.fitBounds(bounds);
+
+    // Map expand/collapse functionality
+    var mapExpandBtn = document.getElementById('mapExpandBtn');
+    var mapElement = document.getElementById('map');
+    var expandText = mapExpandBtn.querySelector('.expand-text');
+    var isExpanded = false;
+
+    mapExpandBtn.addEventListener('click', function () {
+      isExpanded = !isExpanded;
+
+      if (isExpanded) {
+        mapElement.classList.add('expanded');
+        mapExpandBtn.classList.add('expanded');
+        expandText.textContent = 'Collapse';
+      } else {
+        mapElement.classList.remove('expanded');
+        mapExpandBtn.classList.remove('expanded');
+        expandText.textContent = 'Expand';
+      }
+
+      setTimeout(function () {
+        google.maps.event.trigger(map, 'resize');
+        map.fitBounds(bounds);
+      }, 350);
+    });
   }
 
-  // Map expand/collapse functionality
-  var mapExpandBtn = document.getElementById('mapExpandBtn');
-  var mapElement = document.getElementById('map');
-  var expandText = mapExpandBtn.querySelector('.expand-text');
-  var isExpanded = false;
-
-  mapExpandBtn.addEventListener('click', function () {
-    isExpanded = !isExpanded;
-
-    if (isExpanded) {
-      mapElement.classList.add('expanded');
-      mapExpandBtn.classList.add('expanded');
-      expandText.textContent = 'Collapse';
-    } else {
-      mapElement.classList.remove('expanded');
-      mapExpandBtn.classList.remove('expanded');
-      expandText.textContent = 'Expand';
-    }
-
-    setTimeout(function () {
-      map.invalidateSize();
-    }, 350);
-  });
+  // Wait for Google Maps to load
+  window.initMap = initMap;
 
 })();

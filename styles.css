@@ -229,45 +229,6 @@ a { color: var(--accent); }
   height: 600px;
 }
 
-.property-map .leaflet-control-attribution {
-  display: none;
-}
-
-.custom-marker {
-  background: none;
-  border: none;
-}
-
-.marker-pin {
-  width: 30px;
-  height: 42px;
-  position: relative;
-  background: var(--accent);
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.marker-pin::after {
-  content: '';
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border-radius: 50%;
-}
-
-.office-pin {
-  background: #2563eb;
-}
-
-.office-pin::after {
-  background: white;
-}
-
 .map-popup {
   font-family: var(--font);
   padding: 4px 0;
