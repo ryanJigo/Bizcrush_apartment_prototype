@@ -109,10 +109,13 @@ import 'leaflet/dist/leaflet.css';
     }
   ];
 
-  var map = L.map('map').setView([47.6500, -122.2500], 11);
+  var map = L.map('map', {
+    zoomControl: true,
+    attributionControl: false
+  }).setView([47.6500, -122.2500], 10);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution: '',
     maxZoom: 19
   }).addTo(map);
 
@@ -131,6 +134,30 @@ import 'leaflet/dist/leaflet.css';
       '<span class="popup-unit">' + prop.unit + '</span><br>' +
       '<span class="popup-rent">' + prop.rent + '/mo</span></div>';
     marker.bindPopup(popupContent);
+  });
+
+  // Map expand/collapse functionality
+  var mapExpandBtn = document.getElementById('mapExpandBtn');
+  var mapElement = document.getElementById('map');
+  var expandText = mapExpandBtn.querySelector('.expand-text');
+  var isExpanded = false;
+
+  mapExpandBtn.addEventListener('click', function () {
+    isExpanded = !isExpanded;
+
+    if (isExpanded) {
+      mapElement.classList.add('expanded');
+      mapExpandBtn.classList.add('expanded');
+      expandText.textContent = 'Collapse';
+    } else {
+      mapElement.classList.remove('expanded');
+      mapExpandBtn.classList.remove('expanded');
+      expandText.textContent = 'Expand';
+    }
+
+    setTimeout(function () {
+      map.invalidateSize();
+    }, 350);
   });
 
 })();

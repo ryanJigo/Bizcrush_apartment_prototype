@@ -122,8 +122,21 @@
   <!-- Map Section -->
   <section class="map-section">
     <div class="container">
-      <h2 class="section-title">Map View</h2>
-      <p class="section-desc">All properties marked on the map below.</p>
+      <div class="map-header">
+        <div>
+          <h2 class="section-title">Map View</h2>
+          <p class="section-desc">All properties marked on the map below.</p>
+        </div>
+        <button id="mapExpandBtn" class="map-expand-btn" aria-label="Expand map">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+          <span class="expand-text">Expand</span>
+        </button>
+      </div>
       <div id="map" class="property-map"></div>
     </div>
   </section>

@@ -189,14 +189,64 @@ a { color: var(--accent); }
 
 .map-section { padding: 48px 0; }
 
+.map-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.map-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--ease), transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.map-expand-btn:hover {
+  background: var(--accent-hover);
+}
+
+.map-expand-btn:active {
+  transform: scale(0.97);
+}
+
+.map-expand-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.map-expand-btn.expanded svg {
+  transform: rotate(180deg);
+}
+
 .property-map {
-  height: 500px;
+  height: 250px;
   width: 100%;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   background: var(--surface);
+  transition: height 0.3s ease;
+}
+
+.property-map.expanded {
+  height: 600px;
+}
+
+.property-map .leaflet-control-attribution {
+  display: none;
 }
 
 .custom-marker {
@@ -477,5 +527,7 @@ a { color: var(--accent); }
   .master-table { min-width: 720px; }
   .unit-specs { grid-template-columns: 1fr 1fr; }
   .picks-inner { flex-direction: column; gap: 8px; text-align: center; }
-  .property-map { height: 400px; }
+  .property-map { height: 220px; }
+  .property-map.expanded { height: 500px; }
+  .map-header { flex-direction: column; align-items: flex-start; }
 }
