@@ -36,6 +36,13 @@ import 'leaflet/dist/leaflet.css';
       coords: [47.6372, -122.3241],
       rent: "~$2,095+",
       unit: "Eastlake 2BD"
+    },
+    {
+      name: "KSC Seattle",
+      address: "1730 Minor Ave Suite 1050, Seattle, WA 98101",
+      coords: [47.6149, -122.3265],
+      rent: "",
+      unit: "Office Location"
     }
   ];
 
@@ -62,7 +69,7 @@ import 'leaflet/dist/leaflet.css';
     var popupContent = '<div class="map-popup"><strong>' + prop.name + '</strong><br>' +
       '<span class="popup-address">' + prop.address + '</span><br>' +
       '<span class="popup-unit">' + prop.unit + '</span><br>' +
-      '<span class="popup-rent">' + prop.rent + '/mo</span></div>';
+      (prop.rent ? '<span class="popup-rent">' + prop.rent + '/mo</span>' : '') + '</div>';
     marker.bindPopup(popupContent);
   });
 
